@@ -28,14 +28,56 @@ type FrpGCPRemoteSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of FrpGCPRemote. Edit frpgcpremote_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// GCP Project ID that this will be created in (this will be moved to initial controller config in the future)
+	GCPProjectID string `json:"gcp_project_id"`
+
+	// A record name for this service, ex. "my-service" if the full DNS name would be "my-service.my-zone.example.com"
+	DNSAName string `json:"dns_a_name"`
+
+	// DNS Zone configured in GCP, must match subdomain A name, ex. "my-zone" if the full subdomain is "my-zone.example.com"
+	DNSZone string `json:"dns_zone"`
+
+	// Base domain that the DNS zone sits on, ex. "example.com" if the full subdomain is "my-zone.example.com"
+	DNSBaseDomain string `json:"dns_base_domain"`
+
+	// Port that remote FRP instance will listen for frp client connections on
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=65535
+	FrpServerPort int `json:"frp_server_port"`
+
+	// Addr of local service that FRP client will proxy connections to
+	FrpLocalServiceAddr string `json:"frp_local_service_addr"`
+
+	// Port of local service that FRP client will proxy connections to
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=65535
+	FrpLocalServicePort int `json:"frp_local_service_port"`
+
+	// Port exposed by remote FRP instance
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=65535
+	FrpRemotePort int `json:"frp_remote_port"`
 }
 
 // FrpGCPRemoteStatus defines the observed state of FrpGCPRemote
 type FrpGCPRemoteStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+
+	// Shows values like "active", "provisioning", "error"
+	Active string `json:"active"`
+
+	// Shows "healthy" or a related error as the result of health checks (soon tm)
+	Health string `json:"healthy"`
+
+	// Shows provisioning step or error, up to "complete"
+	ProvisionStatus string `json:"provision_status"`
+
+	// IP Address remote proxy is listening on
+	RemoteAddress string `json:"address"`
+
+	// Full DNS name for the remote proxy address
+	RemoteDNSName string `json:"dns_name"`
 }
 
 //+kubebuilder:object:root=true
