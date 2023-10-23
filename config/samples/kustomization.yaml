@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- experimental.milkshakes.cloud_v1_frpgcpremote.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

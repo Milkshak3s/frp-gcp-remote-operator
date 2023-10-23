@@ -1,0 +1,31 @@
+# permissions for end users to edit frpgcpremotes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: frpgcpremote-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: frp-gcp-remote-operator
+    app.kubernetes.io/part-of: frp-gcp-remote-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: frpgcpremote-editor-role
+rules:
+- apiGroups:
+  - experimental.milkshakes.cloud.milkshakes.cloud
+  resources:
+  - frpgcpremotes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - experimental.milkshakes.cloud.milkshakes.cloud
+  resources:
+  - frpgcpremotes/status
+  verbs:
+  - get

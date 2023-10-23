@@ -1,0 +1,27 @@
+# permissions for end users to view frpgcpremotes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: frpgcpremote-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: frp-gcp-remote-operator
+    app.kubernetes.io/part-of: frp-gcp-remote-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: frpgcpremote-viewer-role
+rules:
+- apiGroups:
+  - experimental.milkshakes.cloud.milkshakes.cloud
+  resources:
+  - frpgcpremotes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - experimental.milkshakes.cloud.milkshakes.cloud
+  resources:
+  - frpgcpremotes/status
+  verbs:
+  - get
