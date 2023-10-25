@@ -65,18 +65,23 @@ type FrpGCPRemoteStatus struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Shows values like "active", "provisioning", "error"
+	// +optional
 	Active string `json:"active"`
 
 	// Shows "healthy" or a related error as the result of health checks (soon tm)
+	// +optional
 	Health string `json:"healthy"`
 
 	// Shows provisioning step or error, up to "complete"
+	// +optional
 	ProvisionStatus string `json:"provision_status"`
 
 	// IP Address remote proxy is listening on
+	// +optional
 	RemoteAddress string `json:"address"`
 
 	// Full DNS name for the remote proxy address
+	// +optional
 	RemoteDNSName string `json:"dns_name"`
 }
 
@@ -93,6 +98,7 @@ type FrpGCPRemote struct {
 }
 
 //+kubebuilder:object:root=true
+//+kubebuilder:subresource:status
 
 // FrpGCPRemoteList contains a list of FrpGCPRemote
 type FrpGCPRemoteList struct {

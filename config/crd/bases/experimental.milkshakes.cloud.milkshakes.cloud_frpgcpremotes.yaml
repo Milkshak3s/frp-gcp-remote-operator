@@ -100,12 +100,6 @@ spec:
               provision_status:
                 description: Shows provisioning step or error, up to "complete"
                 type: string
-            required:
-            - active
-            - address
-            - dns_name
-            - healthy
-            - provision_status
             type: object
         type: object
     served: true
